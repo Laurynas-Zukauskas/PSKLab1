@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head/>
+<h:body>
+    <h2>#{bookstoreDetails.bookstore.name}</h2>
+    <p>Books sold:</p>
+    <ol>
+        <ui:repeat value="#{bookstoreDetails.bookstore.books}" var="book">
+            <li><h:link value="#{book.title}" outcome="book?Id=#{book.id}" /></li>
+        </ui:repeat>
+    </ol>
+</h:body>
+</html>

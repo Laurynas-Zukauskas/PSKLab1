@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+>
+<h:head/>
+<h:body>
+    <h2>Books:</h2>
+    <ol>
+        <ui:repeat value="#{books.allBooks}" var="book">
+            <li><h:link value="#{book.title}" outcome="book?Id=#{book.id}" /></li>
+            <ol>
+                <ui:repeat value="#{book.stores}" var="store">
+                    <li><h:link value="#{store.name}" outcome="bookstore?Id=#{store.id}" /></li>
+                </ui:repeat>
+            </ol>
+        </ui:repeat>
+    </ol>
+    <h:form>
+        <h:inputText a:placeholder="title" value="#{books.bookToCreate.title}" required="true" />
+        <h:inputText a:placeholder="ISBN number" value="#{books.bookToCreate.ISBN}" required="true" />
+        <h:commandButton value="Add new book" actionListener="#{books.createBook}" action="books?faces-redirect=true"/>
+    </h:form>
+    <h:link outcome="myBatis/teams" value="MyBatis implementation"/>
+</h:body>
+</html>
