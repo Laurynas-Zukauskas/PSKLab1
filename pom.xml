@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.5.3</version>
+            <version>3.5.6</version>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
@@ -60,9 +60,9 @@
                 <plugin>
                     <groupId>org.mybatis.generator</groupId>
                     <artifactId>mybatis-generator-maven-plugin</artifactId>
-                    <version>1.4.0</version>
+                    <version>1.4.2</version>
                     <configuration>
-                        <contexts>PlayersDB</contexts>
+                        <contexts>Lab1DB</contexts>
                         <verbose>true</verbose>
                     </configuration>
                     <executions>
