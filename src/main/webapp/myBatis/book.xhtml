@@ -9,22 +9,22 @@
 <h:body>
     <h2>#{bookDetailsMyBatis.book.title}</h2>
     <p>ISBN: #{bookDetailsMyBatis.book.isbn}</p>
-    <p>Author: #{bookDetailsMyBatis.author.firstName} #{bookDetailsMyBatis.author.lastName}</p>
+    <p>Author: #{bookDetailsMyBatis.book.author.firstName} #{bookDetailsMyBatis.book.author.lastName}</p>
     <p>Sold at:</p>
     <ol>
-        <ui:repeat value="#{bookDetailsMyBatis.stores}" var="store">
+        <ui:repeat value="#{bookDetailsMyBatis.book.bookstores}" var="store">
             <li><h:link value="#{store.name}" outcome="bookstore?Id=#{store.id}" /></li>
         </ui:repeat>
     </ol>
     <h:form>
-        <h:selectOneMenu value="#{bookDetailsMyBatis.selectedStoreId}">
+        <h:selectOneMenu value="#{bookDetailsMyBatis.selectedStore}">
             <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
             <f:selectItems value="#{bookDetailsMyBatis.storeSelections}" />
         </h:selectOneMenu>
         <h:commandButton value="Add new store" action="#{bookDetailsMyBatis.addStore}"/>
     </h:form>
     <h:form>
-        <h:selectOneMenu value="#{bookDetailsMyBatis.selectedAuthorId}">
+        <h:selectOneMenu value="#{bookDetailsMyBatis.selectedAuthor}">
             <f:selectItem itemValue="#{null}" itemLabel="-- select one --" />
             <f:selectItems value="#{bookDetailsMyBatis.authorSelections}" />
         </h:selectOneMenu>

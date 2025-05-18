@@ -1,7 +1,10 @@
 package lab1.mybatis.dao;
 
 import java.util.List;
+
+import lab1.mybatis.model.Book;
 import lab1.mybatis.model.BooksBookstores;
+import lab1.mybatis.model.Bookstore;
 import org.mybatis.cdi.Mapper;
 
 @Mapper
@@ -21,4 +24,8 @@ public interface BooksBookstoresMapper {
      * @mbg.generated Mon Apr 28 12:23:32 EEST 2025
      */
     List<BooksBookstores> selectAll();
+
+    List<Bookstore> selectByBookId(int bookId);
+
+    List<Book> selectByBookstoreId(int bookstoreId);
 }

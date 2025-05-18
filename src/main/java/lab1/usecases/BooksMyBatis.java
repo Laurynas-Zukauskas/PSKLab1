@@ -2,6 +2,7 @@ package lab1.usecases;
 
 import lab1.mybatis.dao.BooksBookstoresMapper;
 import lab1.mybatis.dao.BookstoreMapper;
+import lab1.mybatis.model.Author;
 import lab1.mybatis.model.Book;
 import lab1.mybatis.dao.BookMapper;
 import lab1.mybatis.model.BooksBookstores;
@@ -37,6 +38,15 @@ public class BooksMyBatis {
     @PostConstruct
     public void init(){
         loadAllBooks();
+        System.out.println("BooksMyBatis init");
+        for (Book book : allBooks) {
+            System.out.println("book " + book.getId() + " |" + book.getTitle() + "| " + book.getIsbn());
+            System.out.println("stores " + book.getBookstores());
+            Author author = book.getAuthor();
+            if (author != null) {
+                System.out.println("author "  + book.getAuthorId() + " " + author + " " + author.getFirstName() + " " + author.getLastName() + " " + author.getId());
+            }
+        }
     }
 
     @Transactional

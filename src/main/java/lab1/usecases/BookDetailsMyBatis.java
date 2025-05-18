@@ -44,16 +44,10 @@ public class BookDetailsMyBatis implements Serializable {
     private Book book;
 
     @Getter @Setter
-    private Author author;
+    private long selectedStore;
 
     @Getter @Setter
-    private List<Bookstore> stores;
-
-    @Getter @Setter
-    private Long selectedStoreId;
-
-    @Getter @Setter
-    private Long selectedAuthorId;
+    private long selectedAuthor;
 
     @Getter @Setter
     private List<SelectItem> storeSelections = new ArrayList<>();
@@ -67,8 +61,6 @@ public class BookDetailsMyBatis implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         Long bookId = Long.parseLong(requestParameters.get("Id"));
         this.book = bookMapper.selectByPrimaryKey(bookId);
-        this.author = authorMapper.selectByPrimaryKey(book.getAuthorId());
-        this.stores = getBookstoresByBook(this.book);
         List<Bookstore> bookstores = bookstoreMapper.selectAll();
         for (Bookstore bookstore : bookstores) {
             storeSelections.add(new SelectItem(bookstore.getId(), bookstore.getName()));
@@ -83,27 +75,20 @@ public class BookDetailsMyBatis implements Serializable {
     public String addStore() {
         BooksBookstores newStore = new BooksBookstores();
         newStore.setBooksId(this.book.getId());
-        newStore.setStoresId(this.selectedStoreId);
+        newStore.setStoresId(this.selectedStore);
         booksBookstoresMapper.insert(newStore);
         return "book.xhtml?Id=" + this.book.getId() + "&faces-redirect=true";
     }
 
     @Transactional
     public String changeAuthor() {
-        this.book.setAuthorId(this.selectedAuthorId);
+        this.book.setAuthorId(selectedAuthor);
         bookMapper.updateByPrimaryKey(this.book);
+        Author newAuthor = authorMapper.selectByPrimaryKey(selectedAuthor);
+        this.book.getAuthor().setId(newAuthor.getId());
+        this.book.getAuthor().setFirstName(newAuthor.getFirstName());
+        this.book.getAuthor().setLastName(newAuthor.getLastName());
+        System.out.println("changed author " + this.book.getAuthor() + " " + this.book.getAuthor().getFirstName());
         return "book.xhtml?Id=" + this.book.getId() + "&faces-redirect=true";
-    }
-
-    public List<Bookstore> getBookstoresByBook(Book book){
-        List<BooksBookstores> allStores = booksBookstoresMapper.selectAll();
-        List<BooksBookstores> filteredStores = allStores.stream()
-                .filter(store -> store.getBooksId().equals(book.getId()))
-                .collect(Collectors.toList());
-        List<Bookstore> bookstores = new ArrayList<>();
-        for(BooksBookstores bookstore: filteredStores){
-            bookstores.add(bookstoreMapper.selectByPrimaryKey(bookstore.getStoresId()));
-        }
-        return bookstores;
     }
 }

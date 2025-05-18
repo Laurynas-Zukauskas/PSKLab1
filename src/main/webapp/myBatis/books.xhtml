@@ -12,7 +12,7 @@
         <ui:repeat value="#{booksMyBatis.allBooks}" var="book">
             <li><h:link value="#{book.title}" outcome="book?Id=#{book.id}" /></li>
             <ol>
-                <ui:repeat value="#{booksMyBatis.getBookstoresByBook(book)}" var="store">
+                <ui:repeat value="#{book.bookstores}" var="store">
                     <li><h:link value="#{store.name}" outcome="bookstore?Id=#{store.id}" /></li>
                 </ui:repeat>
             </ol>
@@ -23,6 +23,5 @@
         <h:inputText a:placeholder="ISBN number" value="#{books.bookToCreate.ISBN}" required="true" />
         <h:commandButton value="Add new book" actionListener="#{books.createBook}" action="books?faces-redirect=true"/>
     </h:form>
-    <h:link outcome="books" value="JPA implementation"/>
 </h:body>
 </html>
