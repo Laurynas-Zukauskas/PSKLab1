@@ -23,6 +23,6 @@
         <h:inputText a:placeholder="ISBN number" value="#{books.bookToCreate.ISBN}" required="true" />
         <h:commandButton value="Add new book" actionListener="#{books.createBook}" action="books?faces-redirect=true"/>
     </h:form>
-    <h:link outcome="myBatis/books" value="MyBatis implementation"/>
+    <h3>Books added this session: #{booksAdded.booksAdded}</h3>
 </h:body>
 </html>

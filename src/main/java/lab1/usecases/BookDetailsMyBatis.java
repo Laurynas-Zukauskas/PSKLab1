@@ -85,9 +85,7 @@ public class BookDetailsMyBatis implements Serializable {
         this.book.setAuthorId(selectedAuthor);
         bookMapper.updateByPrimaryKey(this.book);
         Author newAuthor = authorMapper.selectByPrimaryKey(selectedAuthor);
-        this.book.getAuthor().setId(newAuthor.getId());
-        this.book.getAuthor().setFirstName(newAuthor.getFirstName());
-        this.book.getAuthor().setLastName(newAuthor.getLastName());
+        this.book.setAuthor(newAuthor);
         System.out.println("changed author " + this.book.getAuthor() + " " + this.book.getAuthor().getFirstName());
         return "book.xhtml?Id=" + this.book.getId() + "&faces-redirect=true";
     }

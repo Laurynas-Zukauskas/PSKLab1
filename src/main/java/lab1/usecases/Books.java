@@ -17,6 +17,9 @@ public class Books {
     @Inject
     private BooksDAO booksDAO;
 
+    @Inject
+    private BooksAdded booksAdded;
+
     @Getter @Setter
     private Book bookToCreate = new Book();
 
@@ -30,6 +33,7 @@ public class Books {
 
     @Transactional
     public void createBook(){
+        booksAdded.incrementBooksAdded();
         this.booksDAO.persist(bookToCreate);
     }
 

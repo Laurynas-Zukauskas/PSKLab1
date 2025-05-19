@@ -54,6 +54,7 @@
     select BOOK.ID as ID, ISBN, TITLE, AUTHOR_ID, AUTHOR.FIRST_NAME as AUTHOR_FIRST_NAME, AUTHOR.LAST_NAME AS AUTHOR_LAST_NAME
     from PUBLIC.BOOK
     left join PUBLIC.AUTHOR
+    on BOOK.AUTHOR_ID = AUTHOR.ID
     where BOOK.ID = #{id,jdbcType=BIGINT}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">

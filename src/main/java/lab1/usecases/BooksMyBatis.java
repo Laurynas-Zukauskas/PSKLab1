@@ -24,6 +24,9 @@ public class BooksMyBatis {
     @Inject
     private BookMapper bookMapper;
 
+    @Inject
+    private BooksAdded booksAdded;
+
     @Getter @Setter
     private Book bookToCreate = new Book();
 
@@ -51,6 +54,7 @@ public class BooksMyBatis {
 
     @Transactional
     public void createBook(){
+        booksAdded.incrementBooksAdded();
         this.bookMapper.insert(bookToCreate);
     }
 
